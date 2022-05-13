@@ -1,0 +1,382 @@
+* {box-sizing: border-box; margin:0;}
+
+/*Typography*/
+
+h1,h2,h3,h4{font-family: 'Montserrat', sans-serif;}
+body {font: 16px 'Lora', sans-serif;}
+
+h1 {font-size: 2.5em;}
+h2 {font-size: 2.25em;}
+h3 {font-size: 1.75em; font-weight: 400;}
+a {font-size: 1.5em;}
+p {font-size: 1.2em; line-height: 1.6;}
+
+/*Layout*/
+:root {
+  --beige: #F4F1DE;
+  --orange: #E07A5F;
+  --dark-blue: #3D405B;
+  --green: #81B29A;
+  --yellow: #F2CC8F;
+}
+
+html,body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.content {
+  width: 60%;
+}
+
+img {
+  width: 20vw;
+  height: auto;
+  max-height: 30vh;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/*Utility classes*/
+.center {text-align: center;}
+
+.hoverimg {position: relative; margin:1em;}
+
+.hovertext {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+
+  visibility: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.hoverimg:hover .hovertext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.hoverimg a {
+  color: var(--yellow);
+  text-decoration: none;
+}
+
+.hoverimg a:hover {
+  color: var(--orange);
+}
+
+/*Navigation bar*/
+nav {
+  width: 5%;
+  min-height: 100%;
+  background: var(--dark-blue);
+  color: var(--yellow);
+  overflow: hidden;
+  transition: width 0.5s ease;
+}
+
+nav label {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 3em;
+  cursor: pointer;
+}
+
+nav label:before {
+  content: "☰";
+  position: absolute;
+  width: 100%;
+  font-size: 2em;
+  text-align: center;
+  transition: all 0.5s ease;
+}
+
+:target {
+  z-index: 2;
+  opacity: 1;
+}
+
+/*Hiding mechanism*/
+input {
+  display: none;
+}
+
+input:checked~section {
+  width: 85%;
+}
+
+input:checked~nav {
+  width: 15%;
+}
+
+input:checked~nav>label:before {
+  content: "Menu";
+}
+
+input:checked~nav>label+.navigation {
+  display: flex;
+}
+
+/*closed */
+.navigation {
+  display: none;
+  flex-direction: column;
+  width: 100%;
+}
+
+.navigation a {
+  display: block;
+  align-self: center;
+  padding: 0.5em 0;
+  color: var(--beige);
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+}
+
+nav label,
+.navigation a {
+  border-bottom: 1px dashed;
+  transition: all 0.5s ease;
+}
+
+nav label:hover,
+.navigation a:hover {
+  background: var(--orange);
+}
+
+
+/*Sections*/
+section {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 0;
+  width: 95%;
+  min-height: 100%;
+  opacity: 0;
+  overflow: hidden;
+  transition: width 0.5s, opacity 0.5s;
+}
+
+.content {
+  position: absolute;
+  inset:0;
+  margin: auto;
+}
+
+/*Word Cloud*/
+
+.word_cloud{
+  position: absolute;
+  inset:0;
+
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  gap:0.3em;
+
+  grid-template-areas: "Coding Coding . . ProjectManagement ProjectManagement Software . Java Java Website"
+  ". . . Photographer Photographer Photographer Software . . . Website"
+  "Javascript Javascript . . . . Programmer Programmer Programmer Games Games"
+  ". . . . Name Name Name . . . ."
+  "PHP PHP . . . . . . Photoshop . ."
+  ". . C-sharp . . . . . . Cars ."
+  "Education . C-sharp . . Modelling Modelling Computer . Cars ."
+  "Education Designer Designer Designer . . . Unity . . .";
+
+}
+
+#Programmer {grid-area: Programmer;}
+#Photographer {grid-area: Photographer;}
+#Software {grid-area: Software;}
+#Modelling {grid-area: Modelling;}
+#Coding {grid-area: Coding;}
+#Unity {grid-area: Unity;}
+#Games {grid-area: Games;}
+#Computer {grid-area: Computer;}
+#Website {grid-area: Website;}
+#Designer {grid-area: Designer;}
+#Java {grid-area: Java;}
+#C-sharp {grid-area: C-sharp;}
+#PHP {grid-area: PHP;}
+#Javascript {grid-area: Javascript;}
+#Name {grid-area: Name;}
+#Cars {grid-area: Cars;}
+#Photoshop {grid-area: Photoshop;}
+#Education {grid-area: Education;}
+#ProjectManagement {grid-area: ProjectManagement;}
+
+/* base font color for all words */
+.word_cloud>div {
+  font-size: 1.2rem;
+  color: var(--beige);
+  font-family: 'Lora', sans-serif;;
+}
+
+/* each second word */
+.word_cloud :nth-child(2n) {
+  font-size: 2rem;
+  color: #999BB4;
+  font-weight: bold;
+}
+
+/* each third word (vertical) */
+.word_cloud :nth-child(3n) {
+  writing-mode: vertical-lr;
+  -webkit-writing-mode: vertical-lr;
+  -ms-writing-mode: vertical-lr;
+  color: var(--green);
+}
+
+/* each fourth word */
+.word_cloud :nth-child(4n) {
+  font-size: 3rem;
+  color: var(--yellow);
+}
+
+/* each fifth word */
+.word_cloud :nth-child(5n) {
+  font-size: 4rem;
+  color: var(--orange);
+}
+
+.word_cloud>div {
+  text-shadow: 4px 6px 10px rgba(1, 1, 1, 0.5);
+}
+
+/* ==== Home ===== */
+.title{
+  font-size: 4em;
+  color: var(--beige);
+  letter-spacing: 0.3em;
+  user-select: none;
+}
+.sec-home {
+  float: right;
+  position: relative;
+  background: var(--dark-blue);
+  color: var(--orange);
+  z-index: 1;
+  opacity: 1;
+}
+
+.sec-home a {
+  font-size: 1.2em;
+  color: #eda790;
+  text-decoration-style: dashed;
+}
+
+.sec-home a:hover {
+  color: #e58564;
+}
+
+.sec-home .content {
+  height: 0;
+  text-align: center;
+}
+
+/*About*/
+.sec-about {
+  background: var(--yellow);
+  color: var(--dark-blue);
+}
+
+.sec-about img{
+  width: 10vw;
+  border-radius: 50%;
+  margin: auto;
+  display: block;
+}
+
+.sec-about .content {
+  height: 60%;
+  max-width: 60%;
+}
+
+.sec-about h1,h2,h3{
+  margin:0.5em;
+}
+
+/*Photos*/
+.sec-photos {
+  background: var(--beige);
+}
+
+.photo-container {
+  width: 90%;
+  display: grid;
+  gap: 0.5em;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: masonry;
+  align-content: space-evenly;
+  margin: auto;
+}
+
+figure {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  justify-self: center;
+  align-self: center;
+}
+
+figure>img {
+  object-fit: cover;
+  width: 100%;
+  max-height: 100%;
+  display: block;
+
+  grid-row: 1 / -1;
+  grid-column: 1;
+}
+
+
+/* websites */
+
+.sec-websites .content{
+  background:var(--green);
+  width: 100vw;
+  display:flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* Games */
+
+.sec-games{
+  background: var(--orange);
+}
+.sec-games .content {
+  width: 85vw;
+  height: 90vh;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+}
+
+.sec-games p{
+  font-size: 1em;
+}
+
+/* Media query */
+@media screen and (max-width: 767px) {
+  html {font-size: 12px;}
+  h1 {font-size: 1.5rem;}
+  h2 {font-size: 1.3rem;}
+  h3 {font-size: 1.2rem;}
+  nav label:before {font-size: 1em;}
+}
