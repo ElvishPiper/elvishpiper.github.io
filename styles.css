@@ -1,15 +1,15 @@
 * {box-sizing: border-box; margin:0;}
 
 /*Typography*/
-
+html{font-size: calc(100% + 0.1vw)}
 h1,h2,h3,h4{font-family: 'Montserrat', sans-serif;}
-body {font: 16px 'Lora', sans-serif;}
+body {font-family: 'Lora', sans-serif;}
 
-h1 {font-size: 2.5em;}
-h2 {font-size: 2.25em;}
-h3 {font-size: 1.75em; font-weight: 400;}
-a {font-size: 1.5em;}
-p {font-size: 1.2em; line-height: 1.6;}
+h1 {font-size: 2.5rem;}
+h2 {font-size: 2.25rem;}
+h3 {font-size: 1.75rem; font-weight: 400;}
+a {font-size: 1.5rem;}
+p {font-size: 1.2rem; line-height: 1.6;}
 
 /*Layout*/
 :root {
@@ -26,11 +26,8 @@ html,body {
   height: 100%;
 }
 
-.content {
-  width: 60%;
-}
-
 img {
+  min-width: 150px;
   width: 20vw;
   height: auto;
   max-height: 30vh;
@@ -166,6 +163,7 @@ section {
   min-height: 100%;
   opacity: 0;
   overflow: hidden;
+  overflow-y: auto;
   transition: width 0.5s, opacity 0.5s;
 }
 
@@ -180,15 +178,18 @@ section {
 .word_cloud{
   position: absolute;
   inset:0;
+  width:95%;
+  margin:auto;
 
   display: grid;
   justify-content: center;
   align-content: center;
   gap:0.3em;
 
+  grid-template-columns: repeat(10, 1fr);
   grid-template-areas: "Coding Coding . . ProjectManagement ProjectManagement Software . Java Java Website"
   ". . . Photographer Photographer Photographer Software . . . Website"
-  "Javascript Javascript . . . . Programmer Programmer Programmer Games Games"
+  ". Javascript Javascript . . . Programmer Programmer Programmer Games Games"
   ". . . . Name Name Name . . . ."
   "PHP PHP . . . . . . Photoshop . ."
   ". . C-sharp . . . . . . Cars ."
@@ -257,7 +258,7 @@ section {
 
 /* ==== Home ===== */
 .title{
-  font-size: 4em;
+  font-size: 4rem;
   color: var(--beige);
   letter-spacing: 0.3em;
   user-select: none;
@@ -300,7 +301,7 @@ section {
 }
 
 .sec-about .content {
-  height: 60%;
+  height: 85%;
   max-width: 60%;
 }
 
@@ -314,24 +315,21 @@ section {
 }
 
 .photo-container {
-  width: 90%;
+  width: 95%;
   display: grid;
   gap: 0.5em;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: masonry;
+  grid-template-columns: repeat(4,1fr);
   align-content: space-evenly;
   margin: auto;
 }
 
 figure {
-  display: grid;
-  grid-template-rows: 1fr auto;
   justify-self: center;
   align-self: center;
 }
 
 figure>img {
-  object-fit: cover;
+  object-fit: contain;
   width: 100%;
   max-height: 100%;
   display: block;
@@ -365,7 +363,6 @@ figure>img {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  overflow: auto;
 }
 
 .sec-games p{
@@ -374,9 +371,72 @@ figure>img {
 
 /* Media query */
 @media screen and (max-width: 767px) {
-  html {font-size: 12px;}
+  
   h1 {font-size: 1.5rem;}
   h2 {font-size: 1.3rem;}
   h3 {font-size: 1.2rem;}
-  nav label:before {font-size: 1em;}
+  a {font-size: 1.1rem;}
+  p  {font-size: 1rem;}
+  
+  section {width: 100%;}
+
+  /* Nav bar */
+  nav label:before {font-size: 2em;}
+  nav {
+    position: absolute;
+    z-index: 100;
+    width: 10%;
+    min-height: auto;
+  }
+  nav ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  input:checked~nav {min-height: 100%;}
+  input:checked~nav>label:before {content: "☰";}
+  input:checked~section {width: 100%;}
+  input:checked~nav {width: 25%;}
+
+  /* Home Page */
+  .word_cloud>div {
+    font-size: 1rem;
+  }
+  .word_cloud :nth-child(2n) {
+    font-size: 1.2rem;
+  }
+  .word_cloud :nth-child(4n) {
+    font-size: 1.6rem;
+  }
+  .word_cloud :nth-child(5n) {
+    font-size: 1.8rem;
+  }
+
+  .word_cloud {
+    height: 85%;
+    grid-template-rows: repeat(8, 1fr);
+
+    grid-template-areas: 
+        ". Coding . . ProjectManagement ProjectManagement . . Java Java Website"
+        ". Photographer Photographer . . . Software . Games . Website"
+        ". Javascript . . . . Programmer Programmer Programmer . ."
+        "PHP . . . Name Name Name Name Name . ."
+        ". . . . . . . . . . ."
+        ". . C-sharp . . . Photoshop . . Cars ."
+        "Education . C-sharp . . Modelling Modelling Modelling Computer Cars ."
+        "Education Designer Designer Designer . . . . . Unity .";
+  }
+
+  .title {font-size: 2rem;}
+  
+  /* Photos */
+  .photo-container {grid-template-columns: repeat(2, 1fr);}
+
+  .hovertext {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    visibility: visible;
+    opacity: 1;
+  }
 }
