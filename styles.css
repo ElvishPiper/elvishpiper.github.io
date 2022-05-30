@@ -427,7 +427,7 @@ figure>img {
         "Education Designer Designer Designer . . . . . Unity .";
   }
 
-  .title {font-size: 2rem;}
+  .title {font-size: 2.4em;}
   
   /* Photos */
   .photo-container {grid-template-columns: repeat(2, 1fr);}
